@@ -1,0 +1,31 @@
+version: "3.8"
+x-logging: &default-logging
+  options:
+    max-size: "10m"
+    max-file: "2"
+  driver: json-file
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: on-failure
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    ports:
+      - "27017:27017"
+    volumes:
+      - /var/volumes/mongodb:/data/db
+    logging: *default-logging
+  api:
+    container_name: api
+    restart: on-failure
+    env_file: 
+      - .env  
+    build:
+      context: ./api
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    volumes:
+      - ./api/src:/api/src
+    logging: *default-logging
