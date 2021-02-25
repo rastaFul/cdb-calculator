@@ -3,7 +3,7 @@ FROM node:lts-alpine3.12
 WORKDIR /src
 
 COPY package.json /src
-RUN yarn install
+RUN yarn
 ADD . .
 
 RUN apk add --update tzdata
