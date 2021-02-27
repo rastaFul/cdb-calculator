@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { mainController, cdiController } = require('../controllers');
+const { mainController, cdiController, cdbController } = require('../controllers');
 
 router.get('/api/ping', mainController.ping);
+
+router.get('/api/v1/cdb/evolution', cdbController.getEvolution);
 
 router.post('/api/v1/cdi/fees', cdiController.loadFees);
 
