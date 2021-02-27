@@ -1,5 +1,6 @@
+const CdbModule = require('../modules/cdb-module');
 class CdbController {
-    getEvolution(req, res) {
+    async getEvolution(req, res) {
         try {
             if (!req.body.startPeriod) {
                 return res.status(400).send('startPeriod');
@@ -13,8 +14,13 @@ class CdbController {
                 return res.status(400).send('invalid params[taxCdb]');
             }
 
-            return res.status(200).send(req.body);
+            const { startPeriod, endPeriod, taxCdb } = req.body;
+
+            const cdb = new CdbModule();
+
+            return res.status(200).send(await cdb.getEvolution(startPeriod, endPeriod, taxCdb));
         } catch (e) {
+            console.log(e);
             return res.status(500).send('server error');
         }
     }
