@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { mainController, cdiController, cdbController } = require('../controllers');
 
-router.get('/api/ping', mainController.ping);
+router.get('/api/v1/ping', mainController.ping);
 
 router.get('/api/v1/cdb/evolution', cdbController.getEvolution);
 
