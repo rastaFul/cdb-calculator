@@ -3,11 +3,16 @@ FROM node:lts-alpine3.12
 WORKDIR /
 
 COPY package.json ./
-RUN yarn
+RUN yarn install
 ADD . .
 
 RUN apk add --update tzdata
 ENV TZ=America/Sao_Paulo
 RUN rm -rf /var/cache/apk/*
 
-CMD ["yarn", "start"]
+RUN npm run build
+
+
+EXPOSE 3000
+
+CMD ["yarn", "run","start"]
