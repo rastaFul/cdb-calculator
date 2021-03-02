@@ -109,7 +109,7 @@ class Home extends Component<Props, IState>{
       }
     };
 
-    const response = await axios.get('http://localhost:3001/api/v1/cdb/calculate', requestData);
+    const response = await axios.get('http://52.207.147.224:3001/api/v1/cdb/calculate', requestData);
 
     const chartLabels = [];
     const chartValues = [];
@@ -128,7 +128,7 @@ class Home extends Component<Props, IState>{
           categories: chartLabels,
         },
       },
-      total: response.data.shift().unitPrice
+      total: response.data.length ? response.data.shift().unitPrice : 0
     });
   }
 
@@ -154,9 +154,20 @@ class Home extends Component<Props, IState>{
         <Head>
           <title>Calculator</title>
         </Head>
-        <DatePicker label="Data Inicial" value={this.state.startedDate} onChange={this.startedDataPickerOnChange} />
+        <DatePicker
+          label="Data Inicial"
+          value={this.state.startedDate}
+          onChange={this.startedDataPickerOnChange}
+          minDate={new Date('2010-01-05')}
+          maxDate={this.state.endedDate}
+        />
         <br />
-        <DatePicker label="Data Final" value={this.state.endedDate} onChange={this.endedDataPickerOnChange} />
+        <DatePicker
+          label="Data Final"
+          value={this.state.endedDate}
+          onChange={this.endedDataPickerOnChange}
+          minDate={this.state.startedDate}
+          maxDate={new Date('2019-12-03')} />
         <br />
         <TextField
           id="cdb-percent"
@@ -169,6 +180,19 @@ class Home extends Component<Props, IState>{
             shrink: true,
           }}
           InputProps={{ inputProps: { min: 0 } }}
+        />
+        <br />
+        <TextField
+          id="cdb-value"
+          label="Valor inicial aplicado"
+          type="number"
+          defaultValue={1000.00}
+          value={1000}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          InputProps={{ inputProps: { min: 0 } }}
+          disabled={true}
         />
         <br />
         <Button size='large' color="primary" variant='contained' onClick={this.onSubmit}>Calcular</Button>
