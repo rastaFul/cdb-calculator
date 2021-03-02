@@ -39,7 +39,6 @@ class Home extends Component<Props, IState>{
       cdbTax: 103.5,
       chartOptions: {
         xAxis: {
-          label: 'R$',
           categories: [],
         },
         title: {
@@ -49,6 +48,7 @@ class Home extends Component<Props, IState>{
           {
             data: [],
             showInLegend: false,
+            name: 'CDB'
           }
         ],
         plotOptions: {
