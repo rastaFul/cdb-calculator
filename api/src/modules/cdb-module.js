@@ -4,7 +4,7 @@ const CdiModule = require('./cdi-module');
 
 class CdbModule {
 
-    async calculate(startPeriod, endPeriod, taxCdb, startInvestiment = 1000) {
+    async calculate(startPeriod, endPeriod, cdbRate, startInvestiment = 1000) {
         const cdi = new CdiModule();
         let cursor = CdiModel.find({
             date: {
@@ -17,7 +17,7 @@ class CdbModule {
 
         for await (const cdiDaily of cursor) {
             const tcdi = parseFloat(cdi.getTCDI(cdiDaily.tax).toFixed(8));
-            result = result * ((1 + tcdi * (taxCdb / 100)));
+            result = result * ((1 + tcdi * (cdbRate / 100)));
             evolution.unshift({ date: moment(cdiDaily.date).format('YYYY-MM-DD'), unitPrice: parseFloat(result.toFixed(8)) * startInvestiment});
         }
 
