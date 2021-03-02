@@ -28,14 +28,13 @@ describe('Cdb Test', () => {
 
         const calc = await cdb.calculate('2016-11-14', '2016-11-30', 103.5);
 
-        expect(calc.result).toBe(1005.88934);
-        expect(calc.evolution[0]).toStrictEqual({
-            date: "14/11/2016",
-            result: 1000.53397
+        expect(calc[10]).toStrictEqual({
+            date: "2016-11-14",
+            unitPrice: 1000.53397
         });
-        expect(calc.evolution[10]).toStrictEqual(        {
-            "date": "29/11/2016",
-            "result": 1005.88934
+        expect(calc[0]).toStrictEqual(        {
+            date: "2016-11-29",
+            unitPrice: 1005.88934
         });
     });
 

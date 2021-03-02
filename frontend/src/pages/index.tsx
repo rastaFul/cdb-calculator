@@ -99,22 +99,20 @@ class Home extends Component<Props, IState>{
   async onSubmit() {
     const requestData = {
       params: {
-        startPeriod: moment(this.state.startedDate).format('yyyy-MM-DD'),
-        endPeriod: moment(this.state.endedDate).format('yyyy-MM-DD'),
-        taxCdb: this.state.cdbTax
+        investmentDate: moment(this.state.startedDate).format('yyyy-MM-DD'),
+        currentDate: moment(this.state.endedDate).format('yyyy-MM-DD'),
+        cdbRate: this.state.cdbTax
       }
     };
-
-    console.log(requestData);
 
     const response = await axios.get('http://localhost:3001/api/v1/cdb/calculate', requestData);
 
     const chartLabels = [];
     const chartValues = [];
 
-    for (const object of response.data.evolution) {
-      chartLabels.push(object.date);
-      chartValues.push(object.result)
+    for (const object of response.data) {
+      chartLabels.unshift(object.date);
+      chartValues.unshift(object.unitPrice)
     }
 
     this.setState({
@@ -126,7 +124,7 @@ class Home extends Component<Props, IState>{
           categories: chartLabels,
         },
       },
-      total: response.data.result
+      total: response.data.shift().unitPrice
     });
   }
 

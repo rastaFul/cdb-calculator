@@ -3,25 +3,23 @@ class CdbController {
     async getCalculate(req, res) {
         try {
 
-            console.log(req.query);
-
-            if (!req.query.startPeriod) {
-                return res.status(400).send('invalid params[startPeriod]');
+            if (!req.query.investmentDate) {
+                return res.status(400).send('invalid params[investmentDate]');
             }
 
-            if (!req.query.endPeriod) {
-                return res.status(400).send('invalid params[endPeriod]');
+            if (!req.query.currentDate) {
+                return res.status(400).send('invalid params[currentDate]');
             }
 
-            if (!req.query.taxCdb) {
-                return res.status(400).send('invalid params[taxCdb]');
+            if (!req.query.cdbRate) {
+                return res.status(400).send('invalid params[cdbRate]');
             }
 
-            const { startPeriod, endPeriod, taxCdb } = req.query;
+            const { investmentDate, currentDate, cdbRate } = req.query;
 
             const cdb = new CdbModule();
 
-            return res.status(200).send(await cdb.calculate(startPeriod, endPeriod, taxCdb));
+            return res.status(200).send(await cdb.calculate(investmentDate, currentDate, cdbRate));
         } catch (e) {
             console.log(e);
             return res.status(500).send('server error');
