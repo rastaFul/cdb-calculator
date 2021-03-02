@@ -2,19 +2,22 @@ const CdbModule = require('../modules/cdb-module');
 class CdbController {
     async getCalculate(req, res) {
         try {
-            if (!req.body.startPeriod) {
+
+            console.log(req.query);
+
+            if (!req.query.startPeriod) {
                 return res.status(400).send('invalid params[startPeriod]');
             }
 
-            if (!req.body.endPeriod) {
+            if (!req.query.endPeriod) {
                 return res.status(400).send('invalid params[endPeriod]');
             }
 
-            if (!req.body.taxCdb || req.body.taxCdb < 0) {
+            if (!req.query.taxCdb) {
                 return res.status(400).send('invalid params[taxCdb]');
             }
 
-            const { startPeriod, endPeriod, taxCdb } = req.body;
+            const { startPeriod, endPeriod, taxCdb } = req.query;
 
             const cdb = new CdbModule();
 
