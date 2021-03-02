@@ -18,10 +18,10 @@ class CdbModule {
         for await (const cdiDaily of cursor) {
             const tcdi = parseFloat(cdi.getTCDI(cdiDaily.tax).toFixed(8));
             result = result * ((1 + tcdi * (taxCdb / 100)));
-            evolution.push({ date: moment(cdiDaily.date).format('DD/MM/YYYY'), result: parseFloat(result.toFixed(8)) * startInvestiment});
+            evolution.unshift({ date: moment(cdiDaily.date).format('YYYY-MM-DD'), unitPrice: parseFloat(result.toFixed(8)) * startInvestiment});
         }
 
-        return { result: parseFloat(result.toFixed(8)) * startInvestiment, evolution };
+        return evolution;
     }
 }
 
