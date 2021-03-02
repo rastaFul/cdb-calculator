@@ -9,7 +9,7 @@
         "generate": "node src/cli.js",
         "lint": "eslint . --ext .js",
         "lint:fix": "eslint . --ext .js --fix",
-        "test": "jest"
+        "test": "jest --detectOpenHandles --forceExit"
     },
     "husky": {
         "hooks": {
@@ -29,24 +29,22 @@
             "/node_modules/"
         ]
     },
-    "keywords": [],
-    "author": "Thiago Moraes",
-    "license": "ISC",
+    "keywords": ["cdb", "calculator"],
+    "author": "Rodrigo Nascimento",
+    "license": "MIT",
     "dependencies": {
-        "csv-parse": "^4.15.3",
         "csv-parser": "^3.0.0",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
-        "moment": "^2.29.1",
         "moment-timezone": "^0.5.33",
-        "mongoose": "^5.10.10"
+        "mongoose": "^5.11.15"
     },
     "devDependencies": {
+        "@shelf/jest-mongodb": "^1.2.3",
         "eslint": "^7.6.0",
         "husky": "^4.2.5",
         "jest": "^26.4.0",
         "lint-staged": "^10.2.11",
-        "supertest": "^4.0.2",
         "nodemon": "^2.0.4"
     }
 }
