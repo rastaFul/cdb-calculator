@@ -8,6 +8,8 @@ interface DateConfig {
   label: string;
   value: Date;
   onChange;
+  minDate: Date;
+  maxDate: Date;
 }
 
 class DatePicker extends Component<DateConfig> {
@@ -25,8 +27,8 @@ class DatePicker extends Component<DateConfig> {
           value={this.props.value}
           placeholder="2016-11-14"
           onChange={this.props.onChange}
-          minDate={new Date('2010-01-05')}
-          maxDate={new Date('2019-12-03')}
+          minDate={this.props.minDate}
+          maxDate={this.props.maxDate}
           format="yyyy-MM-DD"
         />
       </MuiPickersUtilsProvider>
