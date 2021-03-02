@@ -7,7 +7,7 @@ class HeaderBar extends Component {
 
     render() {
         return <div>
-            <AppBar position="fixed">
+            <AppBar position="relative">
                 <Toolbar>
                     <Typography variant="h6">
                         Calculadora de investimentos - CDB
