@@ -7,7 +7,7 @@ module.exports.swaggerDocument = {
         version: '0.1.0',
         title: 'Calculadora de investimentos - CDB',
     },
-    basePath: 'api/v1',
+    basePath: '/api/v1',
     schemes: ['http'],
     paths: {
         '/cdb/calculate': {

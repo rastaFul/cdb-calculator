@@ -19,7 +19,7 @@ Este projeto já possui toda a stack necessária para a sua execução, baseada 
 
 As configurações necessárias para o projeto dependem apenas dos seguintes passos: 
 
-- Para realizar o cálculo de rentabilidade, é necessário primeiro importar as taxas CDI's diárias.
+- `opcional` Para realizar o cálculo de rentabilidade, é necessário primeiro importar as taxas CDI's diárias.
 Para isto, basta inserir um arquivo csv com duas colunas(dtDate, dLastTradePrice) na pasta /files do projeto.
 
     `Observação: O repositório já possui um arquivo modelo com as taxas de CDI's com o período de 2010 à 2019, conforme recebido como modelo, não necessitando de alterações caso não queira importar um arquivo diferente`.
