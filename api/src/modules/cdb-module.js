@@ -1,17 +1,11 @@
 const moment = require('moment-timezone');
 const CdiModel = require('../models/cdi-model');
+const CdiModule = require('./cdi-module');
 
 class CdbModule {
 
-    getTCDI(cdi) {
-        return (((cdi / 100) + 1) ** (1 / 252)) - 1;
-    }
-
-    roundOff(value, decimals) {
-        return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-      }
-
-    async getEvolution(startPeriod, endPeriod, taxCdb) {
+    async calculate(startPeriod, endPeriod, taxCdb, startInvestiment = 1000) {
+        const cdi = new CdiModule();
         let cursor = CdiModel.find({
             date: {
                 $gte: moment(startPeriod, 'YYYY-MM-DD').toDate(),
@@ -21,13 +15,13 @@ class CdbModule {
         let evolution = [];
         let result = 1;
 
-        for await (const cdi of cursor) {
-            const tcdi = parseFloat(this.getTCDI(cdi.tax).toFixed(8));
+        for await (const cdiDaily of cursor) {
+            const tcdi = parseFloat(cdi.getTCDI(cdiDaily.tax).toFixed(8));
             result = result * ((1 + tcdi * (taxCdb / 100)));
-            evolution.push({ date: moment(cdi.date).format('DD/MM/YYYY'), result: parseFloat(result.toFixed(8)) });
+            evolution.push({ date: moment(cdiDaily.date).format('DD/MM/YYYY'), result: parseFloat(result.toFixed(8)) * startInvestiment});
         }
 
-        return { result: parseFloat(result.toFixed(8)) * 1000, evolution };
+        return { result: parseFloat(result.toFixed(8)) * startInvestiment, evolution };
     }
 }
 

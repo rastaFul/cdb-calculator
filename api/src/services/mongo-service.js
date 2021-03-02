@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 class Mongo {
     constructor() {
+        console.log()
         this.url = `mongodb://${process.env.MONGO_HOST}:27017/${process.env.MONGO_SCHEMA}`;
         this.options = {
             useNewUrlParser: true,

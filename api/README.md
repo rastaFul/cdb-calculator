@@ -1,37 +1,27 @@
-## Setup
+# API
 
-Install dependencies:
+## Testes
 
-```bash
-$ yarn install
-```
+Os testes foram desenvolvidos através do Jest e Mongo Memory, removendo a necessidade de um serviço de banco de dados real, pois o banco de dados é virtualizado em memória através do Mongo Memory.
 
-Start app:
+Para executar os testes unitários é necessário implementar os seguintes passos:
 
-```bash
-$ yarn start
-```
+- Instalar as dependências do projeto:
 
-Run on development:
+Através do yarn
 
-```bash
-$ yarn start:dev
-```
+yarn
 
-Run on Docker:
+Através do npm
 
-```bash
-$ bash docker.sh start
-```
+npm install
 
-Run tests:
+- Executar os testes:
 
-```bash
-$ yarn test
-```
+Através do yarn
 
-Run linter:
+yarn test
 
-```bash
-$ yarn lint
-```
+Através do npm
+
+npm run test
