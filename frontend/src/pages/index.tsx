@@ -39,13 +39,17 @@ class Home extends Component<Props, IState>{
       cdbTax: 103.5,
       chartOptions: {
         xAxis: {
+          label: 'R$',
           categories: [],
         },
         title: {
           text: 'Rendimentos CDB'
         },
         series: [
-          { data: [] }
+          {
+            data: [],
+            showInLegend: false,
+          }
         ],
         plotOptions: {
           series: {
